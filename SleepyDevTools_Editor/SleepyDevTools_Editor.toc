@@ -1,0 +1,17 @@
+## Interface: 10002
+## Title: Sleepy Dev Tools - Editor
+## Author: Sarah Mantovani
+## Version: 0.1
+## Dependencies: SleepyDevTools
+## LoadOnDemand: 1
+## SavedVariables: sdtEditorDb
+
+Core\Constants.lua
+
+Data\RecordTemplates.lua
+Data\DataAccess.lua
+Data\DataServices.lua
+
+SleepyDevTools_Editor.lua
+
+UI\EditorUI.xml

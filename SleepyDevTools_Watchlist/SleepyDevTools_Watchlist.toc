@@ -1,0 +1,13 @@
+## Interface: 10002
+## Title: Sleepy Dev Tools - Watchlist
+## Author: Sarah Mantovani
+## Version: 0.1
+## Dependencies: SleepyDevTools
+## LoadOnDemand: 1
+## SavedVariables: sdtWatchlistDb
+
+Core\Constants.lua
+
+SleepyDevTools_Watchlist.lua
+
+UI\WatchlistUI.xml

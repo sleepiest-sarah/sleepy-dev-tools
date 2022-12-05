@@ -1,0 +1,15 @@
+## Interface: 10002
+## Title: Sleepy Dev Tools
+## Author: Sarah Mantovani
+## Version: 0.1
+
+embeds.xml
+
+Core\Constants.lua
+Core\SlashCommands.lua
+Core\ModuleLoader.lua
+Core\LuaManager.lua
+
+SleepyDevTools.lua
+
+UI\SleepyDevToolsUI.xml
