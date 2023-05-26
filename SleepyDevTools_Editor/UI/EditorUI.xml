@@ -3,6 +3,7 @@
     SleepyDevTools.Editor.UI = {}
   </Script>
   
+  <Include file="Templates\Templates.xml" />
   <Include file="Widgets\Widgets.xml" />
   
   <Include file="UIManager.lua" />

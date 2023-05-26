@@ -1,0 +1,52 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/..\FrameXML\UI.xsd">
+  <Script file="MainWindow.lua" />
+  
+  <Frame name="sdtMainWindow" mixin="sdtMainWindowMixin" clampedtoScreen="true" dontSavePosition="false" toplevel="true" movable="true" resizable="true" enableMouse="true">
+    <Size x="500" y="500" />
+    <ResizeBounds>
+      <minResize x="500" y="500"/>
+      <maxResize>
+        <RelDimension x=".6" y=".5"/>
+      </maxResize>
+    </ResizeBounds>
+    <Anchors>
+      <Anchor point="CENTER"/>
+    </Anchors>
+    <Frames>
+      <Button parentKey="closeButton" inherits="UIPanelCloseButton">
+        <Anchors>
+          <Anchor point="TOPRIGHT" />
+        </Anchors>
+      </Button>
+      <Button parentKey="resizeButton">
+        <Size x="10" y="10"/>
+        <Anchors>
+          <Anchor point="BOTTOMRIGHT" x="-5" y="5"/>
+        </Anchors>
+        <NormalTexture file="Interface/ChatFrame/UI-ChatIM-SizeGrabber-Down"/>
+        <PushedTexture file="Interface/ChatFrame/UI-ChatIM-SizeGrabber-Up"/>
+        <HighlightTexture file="Interface/ChatFrame/UI-ChatIM-SizeGrabber-Highlight"/>
+        <Scripts>
+          <OnMouseDown>
+            self:GetParent():StartSizing()
+          </OnMouseDown>
+          <OnMouseUp>
+            self:GetParent():StopMovingOrSizing();
+          </OnMouseUp>
+        </Scripts>
+      </Button>
+    </Frames>
+    <Scripts>
+      <OnLoad>
+        self:RegisterForDrag("LeftButton");
+        self:OnLoad()
+      </OnLoad>
+      <OnDragStart>
+        self:StartMoving();
+      </OnDragStart>
+      <OnDragStop>
+        self:StopMovingOrSizing();
+      </OnDragStop>
+    </Scripts>
+  </Frame>
+</Ui>

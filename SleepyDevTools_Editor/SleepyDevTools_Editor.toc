@@ -7,8 +7,10 @@
 ## SavedVariables: sdtEditorDb
 
 Core\Constants.lua
+Core\API.lua
 
 Data\RecordTemplates.lua
+Data\File.lua
 Data\DataAccess.lua
 Data\DataServices.lua
 

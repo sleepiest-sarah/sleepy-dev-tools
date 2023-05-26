@@ -7,7 +7,7 @@ local ef = require('Libs.WowEventFramework.WowEventFramework') or WowEventFramew
 local function loadAddon(event, addon)
   if (addon == wl.ADDON_NAME) then
     --ds.InitializeDatabase()
-    wl.UI.Open()
+    --wl.UI.Open()
   end
 end
 

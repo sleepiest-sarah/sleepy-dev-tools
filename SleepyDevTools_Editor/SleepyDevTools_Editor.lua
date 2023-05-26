@@ -7,7 +7,7 @@ local ds = SleepyDevTools.Editor.DataServices
 local function loadAddon(event, addon)
   if (addon == editor.ADDON_NAME) then
     ds.InitializeDatabase()
-    editor.UI.Open()
+    --editor.UI.Open()
   end
 end
 

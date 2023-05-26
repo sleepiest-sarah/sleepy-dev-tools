@@ -1,0 +1,9 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/..\FrameXML\UI.xsd">
+  
+  <Button name="sdtFileListButtonTemplate" virtual="true">
+    <Size x="100" y="30" />
+    <NormalFont inherits="GameFontWhite"/>
+    <HighlightFont inherits="GameFontNormal"/>
+    <PushedTextOffset x="1" y="-1"/>
+  </Button>
+</Ui>

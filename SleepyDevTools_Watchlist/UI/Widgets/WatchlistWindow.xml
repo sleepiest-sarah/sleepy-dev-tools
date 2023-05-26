@@ -2,19 +2,13 @@
   <Script file="Watchlist.lua" />
   <Script file="WatchlistWindow.lua" />
   
-  <Frame name="sdtWatchlistWindow" toplevel="true" mixin="sdtWatchlistWindowMixin" movable="true" enableMouse="true" hidden="true" clampedToScreen="true">
+  <Frame name="sdtWatchlistWindow" mixin="sdtWatchlistWindowMixin" hidden="true">
     <Size x="500" y="400" />
     <Anchors>
       <Anchor point="CENTER"/>
     </Anchors>
     <Frames>
-    
-      <Button parentKey="closeButton" inherits="UIPanelCloseButton">
-        <Anchors>
-          <Anchor point="TOPRIGHT" />
-        </Anchors>
-      </Button>
-      
+
       <Frame parentKey="watchlist" mixin="sdtWatchlistMixin" inherits="SleepyContainer">
         <KeyValues>
           <KeyValue key="layout" value="List" />

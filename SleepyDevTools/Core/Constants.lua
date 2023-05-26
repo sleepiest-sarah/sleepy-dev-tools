@@ -3,7 +3,6 @@ local sdt = SleepyDevTools
 
 sdt.ADDON_NAME = "SleepyDevTools"
 
-sdt.EDITOR_ADDON_NAME = "SleepyDevTools_Editor"
-sdt.WATCHLIST_ADDON_NAME = "SleepyDevTools_Watchlist"
+sdt.MAX_TABLE_TRAVERSE_DEPTH = 5
 
 return sdt

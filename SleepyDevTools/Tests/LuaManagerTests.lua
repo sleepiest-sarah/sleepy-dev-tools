@@ -17,5 +17,12 @@ function LuaManagerTests.testPrettyFormatTable()
   lu.assertNotNil(res)
 end
 
+function LuaManagerTests.testDumpTableToString()
+  local res = lm.DumpTableToString({a=5,b="10"})
+  
+  res = lm.DumpTableToString({a=5,b="10",c={d=15}})
+  print(res)
+end
+
 lu.LuaUnit.verbosity = lu.VERBOSITY_VERBOSE
 lu.LuaUnit.run('LuaManagerTests')

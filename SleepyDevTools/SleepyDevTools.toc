@@ -7,8 +7,14 @@ embeds.xml
 
 Core\Constants.lua
 Core\SlashCommands.lua
+Core\Module.lua
 Core\ModuleLoader.lua
-Core\LuaManager.lua
+Core\Themes.lua
+
+Lua\Token.lua
+Lua\Scanner.lua
+Lua\SyntaxHighlighter.lua
+Lua\LuaManager.lua
 
 SleepyDevTools.lua
 

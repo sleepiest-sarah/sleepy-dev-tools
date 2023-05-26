@@ -4,7 +4,9 @@ local ef = require('Libs.WowEventFramework.WowEventFramework') or WowEventFramew
 
 local function loadAddon(event, addon)
   if (addon == sdt.ADDON_NAME) then
-    sdt.ModuleLoader.LoadModule(sdt.WATCHLIST_ADDON_NAME)
+    sdt.ModuleLoader.LoadAllModules()
+    
+    sdt.UI.Open()
   end
 end
 

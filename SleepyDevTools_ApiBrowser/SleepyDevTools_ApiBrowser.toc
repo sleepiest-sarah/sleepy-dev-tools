@@ -1,0 +1,16 @@
+## Interface: 10002
+## Title: Sleepy Dev Tools - API Browser
+## Author: Sarah Mantovani
+## Version: 0.1
+## Dependencies: SleepyDevTools
+## LoadOnDemand: 1
+## SavedVariables: 
+
+Core\Constants.lua
+Core\API.lua
+Core\ApiObjectFactory.lua
+Core\ApiManager.lua
+
+SleepyDevTools_APIBrowser.lua
+
+UI\APIBrowserUI.xml

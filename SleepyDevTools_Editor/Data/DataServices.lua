@@ -7,12 +7,30 @@ function ds.InitializeDatabase()
   da.InitializeDatabase()
 end
 
-function ds.SaveAutoFile(text)
-  da.SaveAutoFile(text)
+function ds.SaveFile(file)
+  if (file.name ~= "") then
+    da.SaveFile(file)
+  end
 end
 
-function ds.GetAutoSavedFile()
-  return da.GetAutoSavedFile()
+function ds.SaveCurrentFile(file)
+  da.SaveCurrentFile(file)
+end
+
+function ds.GetFiles()
+  return da.GetFiles()
+end
+
+function ds.GetFile(name)
+  return da.GetFile(name)
+end
+
+function ds.GetCurrentFile()
+  return da.GetCurrentFile() or LCTableUtils.shallowCopy(SleepyDevTools.Editor.RecordTemplates.file_record_template)
+end
+
+function ds.DeleteFile(file)
+  da.DeleteFile(file)
 end
 
 return ds

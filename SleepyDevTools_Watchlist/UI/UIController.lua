@@ -7,6 +7,8 @@ local ui_initialized = false
 
 function UI.Initialize()
   ui_initialized = true
+  
+  UI.Widgets.WatchlistWindow:AddItem({[1]=1,["1"]="1",a=5, b=3, c="7",d={e=10, f = {g="bear", h="chair",["5"]=20}}})
 end
 
 function UI.TearDown()
@@ -19,5 +21,5 @@ function UI.Open()
   end
   
   UI.Widgets.WatchlistWindow:Show()
-  UI.Widgets.WatchlistWindow:AddItem({[1]=1,["1"]="1",a=5, b=3, c="7",d={e=10, f = {g="bear", h="chair",["5"]=20}}})
+
 end

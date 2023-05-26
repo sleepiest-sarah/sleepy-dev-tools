@@ -6,4 +6,8 @@
   <Script file="Constants\Definitions.lua" />
   
   <Include file="Templates\Templates.xml" />
+  <Include file="Widgets\Widgets.xml" />
+  
+  <Script file="UIManager.lua" />
+  <Script file="UIController.lua" />
 </Ui>

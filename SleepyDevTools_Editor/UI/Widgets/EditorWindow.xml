@@ -1,25 +1,21 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/..\FrameXML\UI.xsd">
   <Script file="EditBox.lua" />
   <Script file="EditorControls.lua" />
+  <Script file="EditorFiles.lua" />
+  <Script file="EditorOutput.lua" />
+  <Script file="EditorConsole.lua" />
   <Script file="EditorWindow.lua" />
   
-  <Frame name="sdtEditorWindow" toplevel="true" mixin="sdtEditorWindowMixin" movable="true" enableMouse="true" hidden="true" clampedToScreen="true">
-    <Size x="500" y="400" />
+  <Frame name="sdtEditorWindow" mixin="sdtEditorWindowMixin" hidden="true">
     <Anchors>
       <Anchor point="CENTER"/>
     </Anchors>
     <Frames>
-    
-      <Button parentKey="closeButton" inherits="UIPanelCloseButton">
-				<Anchors>
-					<Anchor point="TOPRIGHT" />
-				</Anchors>
-			</Button>
       
       <Frame parentKey="controls" mixin="sdtEditorControlsMixin">
         <Size x="400" y="30"/>
         <Anchors>
-          <Anchor point="TOPLEFT" x="50" y="-20" />
+          <Anchor point="TOPLEFT" x="120" y="-20" />
         </Anchors>
         <Frames>
           <Button parentKey="runButton" text="Run" inherits="UIPanelButtonTemplate">
@@ -28,29 +24,160 @@
               <Anchor point="TOPLEFT"/>
             </Anchors>
           </Button>
+          <Button parentkey="newButton" text="New" inherits="UIPanelButtonTemplate">
+            <Size x="50" y="30"/>
+            <Anchors>
+              <Anchor point="TOPLEFT" relativeKey="$parent.runButton" relativePoint="TOPRIGHT" x="5"/>
+            </Anchors>
+          </Button>
+          <Button parentKey="saveButton" text="Save As" inherits="UIPanelButtonTemplate">
+            <Size x="80" y="30"/>
+            <Anchors>
+              <Anchor point="TOPLEFT" relativeKey="$parent.newButton" relativePoint="TOPRIGHT" x="5"/>
+            </Anchors>
+          </Button>
+          <Button parentKey="deleteButton" text="Delete" inherits="UIPanelButtonTemplate">
+            <Size x="80" y="30"/>
+            <Anchors>
+              <Anchor point="TOPLEFT" relativeKey="$parent.saveButton" relativePoint="TOPRIGHT" x="5"/>
+            </Anchors>
+          </Button>          
         </Frames>
         <Scripts>
           <OnLoad method="OnLoad" />
         </Scripts>
       </Frame>
       
-      <Frame parentKey="editBox" mixin="sdtEditBoxMixin" >
+      <ScrollFrame parentKey="editBox" mixin="sdtEditBoxMixin" inherits="UIPanelScrollFrameTemplate">
         <Anchors>
-          <Anchor point="TOPLEFT" x="50" y="-50" />
-          <Anchor point="BOTTOMRIGHT" x="-50" y="50"/>
+          <Anchor point="TOPLEFT" x="120" y="-50"/>
+          <Anchor point="BOTTOMRIGHT" x="-40" y="100"/>
         </Anchors>
-        <Frames>
-          <EditBox parentKey="field" multiLine="true" font="GameFontWhite">
+        <ScrollChild>
+          <EditBox parentKey="field" multiLine="true" historyLines="10" font="GameFontWhite">
+            <Size x="330" y="1"/>
             <Anchors>
-              <Anchor point="TOPLEFT" x="10" y="-10" />
-              <Anchor point="BOTTOMRIGHT" x="-10" y="10"/>  
+              <Anchor point="LEFT" x="0" y="0"/>
+              <Anchor point="RIGHT" x="0" y="0"/>
             </Anchors>
           </EditBox>
+        </ScrollChild>
+        <Frames>
+          <ScrollFrame parentKey="lineNumScroller" inherits="HybridScrollFrameTemplate">
+            <Size x="30" y="310"/>
+            <Anchors>
+              <Anchor point="TOPLEFT" x="0" y="0"/>
+              <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMLEFT" x="30" y="0" />
+            </Anchors>
+          </ScrollFrame>
+        </Frames>
+        <Scripts>
+          <OnLoad method="OnLoad" inherit="prepend"/>
+          <OnMouseDown method="OnMouseDown" />
+          <OnSizeChanged method="OnSizeChanged" />
+        </Scripts>
+      </ScrollFrame>
+      
+      <Frame parentKey="fileList" mixin="sdtEditorFilesMixin">
+        <Size x="100" y="300" />
+        <Anchors>
+          <Anchor point="TOPLEFT" x="10" y="-50" />
+        </Anchors>
+        <Frames>
+          <Frame parentKey="list" mixin="SleepyButtonListMixin" setAllPoints="true">
+            <KeyValues>
+              <KeyValue key="topPadding" value="10" type="number" />
+              <KeyValue key="rowPadding" value="10" type="number" />
+            </KeyValues>
+          </Frame>
         </Frames>
         <Scripts>
           <OnLoad method="OnLoad" />
-        </Scripts>
+        </Scripts>        
       </Frame>
+      
+      <Frame parentKey="fileInfo">
+        <Size y="30"/>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeKey="$parent.fileList" relativePoint="BOTTOMLEFT" />
+          <Anchor point="TOPRIGHT" relativeKey="$parent.fileList" relativePoint="BOTTOMRIGHT" />
+        </Anchors>
+        <Layers>
+          <Layer level="DIALOG">
+            <FontString parentKey="name" font="GameFontWhite">
+              <Size x="100" y="32"/>
+              <Anchors>
+                <Anchor point="TOPLEFT"/>
+              </Anchors>
+            </FontString>
+          </Layer>
+        </Layers>
+      </Frame>
+      
+      <Frame parentKey="consoleOutputContainer" mixin="SleepyTabbedContainerMixin">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeKey="$parent.editBox" relativePoint="BOTTOMLEFT" x="0" y="-20"/>
+          <Anchor point="BOTTOMRIGHT" x="-40" y="10"/>        
+        </Anchors>      
+      
+        <Frames>
+          <ScrollFrame parentKey="consoleWindow" mixin="sdtEditorConsoleMixin" inherits="UIPanelScrollFrameTemplate">
+            <ScrollChild>
+              <Frame parentKey="innerConsoleContainer">
+                <Size x="330" y="75"/>
+                <Anchors>
+                  <Anchor point="TOPLEFT"/>
+                </Anchors>
+                <Frames>
+                  <ScrollingMessageFrame parentKey="consoleHistory" font="GameFontWhite">
+                    <Size x="330" y="40"/>
+                    <Anchors>
+                      <Anchor point="TOPLEFT" />
+                      <Anchor point="BOTTOMRIGHT" y="20"/>
+                    </Anchors>
+                    <Scripts>
+                      <OnLoad>
+                        self:SetFading(false);
+                        self:SetFontObject(ConsoleFontSmall);
+                        self:SetJustifyH("LEFT");
+                        self:SetHyperlinksEnabled(true);
+                        self:SetTextCopyable(true);
+                      </OnLoad>
+                    </Scripts>
+                  </ScrollingMessageFrame>
+                
+                  <EditBox parentKey="consoleInput" font="ConsoleFontSmall" autoFocus="false">
+                    Size x="330" y="20"/>
+                    <Anchors>
+                      <Anchor point="TOPLEFT" relativeKey="$parent.consoleHistory" relativePoint="BOTTOMLEFT" />
+                      <Anchor point="BOTTOMRIGHT" y="0"/>
+                    </Anchors>
+                  </EditBox>
+                </Frames>
+              </Frame>
+            </ScrollChild>
+            <Scripts>
+              <OnLoad method="OnLoad" inherit="prepend" />
+              <OnSizeChanged method="OnSizeChanged" />
+            </Scripts>
+          </ScrollFrame>
+          
+          <ScrollingMessageFrame parentKey="outputWindow" mixin="sdtOutputWindowMixin">
+            <Scripts>
+              <OnLoad method="OnLoad" inherit="prepend"/>
+            </Scripts>
+          </ScrollingMessageFrame>
+        </Frames>
+      </Frame>
+      
+
+        
+        
+
+      
+
+      
+
       
     </Frames> <!-- sdtEditorWindow -->
     <Scripts>

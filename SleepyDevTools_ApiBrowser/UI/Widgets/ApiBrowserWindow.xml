@@ -1,0 +1,87 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/..\FrameXML\UI.xsd">
+  <Script file="ApiSearchBar.lua"/>
+  <Script file="TypeControls.lua" />
+  <Script file="ApiTypeInfo.lua" />
+  <Script file="ApiBrowserWindow.lua" />
+  
+  <Frame name="sdtApiBrowserWindow" mixin="sdtApiBrowserWindowMixin">
+    <Size x="500" y="400" />
+    <Anchors>
+      <Anchor point="CENTER"/>
+    </Anchors>
+    <Frames>
+      <Frame parentKey="searchBar" mixin="sdtApiSearchBarMixin">
+        <Size x="200" y="30"/>
+        <Anchors>
+          <Anchor point="TOPRIGHT" x="-30" y="-5" />
+        </Anchors>        
+        <Frames>
+          <EditBox parentKey="editBox" letters="30" font="GameFontWhite" inherits="SearchBoxTemplate">
+            <Size x="100" y="30"/>
+            <Anchors>
+              <Anchor point="TOPRIGHT"/>
+            </Anchors>
+          </EditBox>
+        </Frames>
+        <Scripts>
+          <OnLoad method="OnLoad"/>
+        </Scripts>
+      </Frame>
+    
+      <Frame parentKey="controls" mixin="sdtApiTypeControlsMixin">
+        <Size x="400" y="30"/>
+        <Anchors>
+          <Anchor point="TOPLEFT" x="20" y="-5" />
+        </Anchors>
+        <Frames>
+          <Button parentKey="systemsButton" text="Systems" inherits="UIPanelButtonTemplate">
+            <Size x="60" y="20"/>
+            <Anchors>
+              <Anchor point="TOPLEFT"/>
+            </Anchors>
+          </Button>
+          <Button parentkey="tablesButton" text="Tables" inherits="UIPanelButtonTemplate">
+            <Size x="50" y="20"/>
+            <Anchors>
+              <Anchor point="TOPLEFT" relativeKey="$parent.systemsButton" relativePoint="TOPRIGHT" x="5"/>
+            </Anchors>
+          </Button>
+          <Button parentKey="functionsButton" text="Functions" inherits="UIPanelButtonTemplate">
+            <Size x="80" y="20"/>
+            <Anchors>
+              <Anchor point="TOPLEFT" relativeKey="$parent.tablesButton" relativePoint="TOPRIGHT" x="5"/>
+            </Anchors>
+          </Button>
+          <Button parentKey="fieldsButton" text="Fields" inherits="UIPanelButtonTemplate">
+            <Size x="50" y="20"/>
+            <Anchors>
+              <Anchor point="TOPLEFT" relativeKey="$parent.functionsButton" relativePoint="TOPRIGHT" x="5"/>
+            </Anchors>
+          </Button>
+        </Frames>
+        <Scripts>
+          <OnLoad method="OnLoad" />
+        </Scripts>
+      </Frame>
+    
+      <ScrollFrame parentKey="typeInfo" mixin="sdtApiTypeInfoMixin" inherits="UIPanelScrollFrameTemplate">
+        <Size x="450" y="350"/>
+        <Anchors>
+          <Anchor point="TOPLEFT" x="20" y="-40"/>
+        </Anchors>
+        <ScrollChild>
+          <Frame parentKey="scrollChild" mixin="SleepyTextTableMixin,SleepyButtonTableMixin">
+            <Size x="450" y="1"/>
+          </Frame>
+        </ScrollChild>
+        <Scripts>
+          <OnLoad method="OnLoad" inherit="prepend"/>
+        </Scripts>        
+      </ScrollFrame>
+
+    </Frames>
+    <Scripts>
+      <OnLoad method="OnLoad" />
+    </Scripts>
+  </Frame>
+</Ui>
